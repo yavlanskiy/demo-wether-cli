@@ -1,0 +1,25 @@
+{
+  "name": "demo-wether-cli",
+  "version": "1.0.0",
+  "description": "CLI fore getting wether",
+  "main": "index.js",
+  "bin": "./index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cli",
+    "demo",
+    "wether"
+  ],
+  "author": "max yavlanskiy",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://"
+  },
+  "bugs": {
+    "email": "yavlansky@gmail.com"
+  }
+}
