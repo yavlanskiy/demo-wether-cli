@@ -1,6 +1,6 @@
 const getArgs = (args) => {
     const res = {};
-    const [executer, file, ...rest] = args;
+    const [...rest] = args;
     rest.forEach((value, index, array) => {
         if(value.charAt(0) === '-'){
             if (index === array.length - 1){
