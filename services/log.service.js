@@ -12,12 +12,24 @@ const printSuccess = (message) => {
 const printHelp = () => {
   console.log(dedent(
       `${chalk.bgCyan(' <HELP> ')}
-      ${chalk.bgGray('Без параметров')} - вывод погоды
-      ${chalk.bgGray('-s [CITY]')} - для установки города
-      ${chalk.bgGray('-h')} - для вывода помощи
-      ${chalk.bgGray('-t [API_KEY]')} - для сохранения токена
+      ${chalk.bgGray('Без параметров')} - виведення погоди
+      ${chalk.bgGray('-s [CITY]')} - для встановлення міста
+      ${chalk.bgGray('-h')} - для виведення допомоги
+      ${chalk.bgGray('-t [API_KEY]')} - для збереження токена
       `
   ))
 }
 
-export {printError, printHelp, printSuccess}
+const printWeather = (res, icon) => {
+    console.log(
+        dedent(`
+        ${chalk.bgYellow(' WEATHER ')} Погода в місті ${res.name}
+        ${icon} ${res.weather[0].description}
+        Температура: ${res.main.temp}° (відчувається як ${res.main.feels_like}°)
+        Вологість: ${res.main.humidity}%
+        Швидкість вітру: ${res.wind.speed}м/с
+        `)
+    );
+}
+
+export {printError, printHelp, printSuccess, printWeather}

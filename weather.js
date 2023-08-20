@@ -1,18 +1,18 @@
 #!usr/bin/env node
 import {getArgs} from './helpers/args.js'
-import {printError, printHelp, printSuccess} from "./services/log.service.js";
+import {printError, printHelp, printSuccess, printWeather} from "./services/log.service.js";
 import {getKeyValue, saveKeyValue, TOKEN_DICTIONARY} from "./services/storage.service.js";
-import {getWeather} from "./services/api.service.js";
+import {getIcon, getWeather} from "./services/api.service.js";
 
 
 const saveToken = async (token) => {
     if (!token.length) {
-        printError('Не передан token.')
+        printError('Не передано token.')
         return
     }
     try {
         await saveKeyValue(TOKEN_DICTIONARY.token, token)
-        printSuccess('Токен сохранен!')
+        printSuccess('Токен збережено!')
     } catch (e){
         printError(e)
     }
@@ -20,12 +20,12 @@ const saveToken = async (token) => {
 
 const saveCity = async (city) => {
     if (!city.length) {
-        printError('Не передан City')
+        printError('Не передано City')
         return
     }
     try {
         await saveKeyValue(TOKEN_DICTIONARY.city, city)
-        printSuccess('City сохранен!')
+        printSuccess('City збережено!')
     } catch (e){
         printError(e)
     }
@@ -35,12 +35,12 @@ const getForecast = async () => {
     try {
         const city = process.env.CITY ?? await getKeyValue(TOKEN_DICTIONARY.city);
         const weather =  await getWeather(city)
-        console.log(weather); // красивый вывод погоды
+        printWeather(weather, getIcon(weather.weather[0].icon));
     } catch (e) {
         if (e?.response?.status === 404) {
-            printError('Неверно указан город');
+            printError('Невірно вказано місто');
         } else if (e?.response?.status === 401) {
-            printError('Неверно указан token')
+            printError('Невірно вказано token')
         } else {
             printError(e.message)
         }

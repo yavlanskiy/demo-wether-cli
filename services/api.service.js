@@ -28,7 +28,7 @@ const getIcon = (icon) => {
 const getWeather = async (city) => {
     const token = process.env.TOKEN ?? await getKeyValue(TOKEN_DICTIONARY.token);
     if(!token) {
-        throw new Error('Не задан ключ API, задайте его через команду -t [API_KEY]')
+        throw new Error('Не задано ключ API, задайте його через команду -t [API_KEY]')
     }
 
    const { data } = await axios.get('https://api.openweathermap.org/data/2.5/weather', {
@@ -42,4 +42,4 @@ const getWeather = async (city) => {
     return data
 }
 
-export {getWeather}
+export {getWeather, getIcon}
