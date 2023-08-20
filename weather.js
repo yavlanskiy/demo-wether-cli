@@ -16,7 +16,21 @@ const saveToken = async (token) => {
     } catch (e){
         printError(e)
     }
+}
 
+const getForecast = async () => {
+    try {
+        const weather = await getWeather(process.env.CITY)
+        console.log(weather); // красивый вывод погоды
+    } catch (e) {
+        if (e?.response?.status === 404) {
+            printError('Неверно указан город');
+        } else if (e?.response?.status === 401) {
+            printError('Неверно указан token')
+        } else {
+            printError(e.message)
+        }
+    }
 
 }
 const initCLI = () => {
@@ -25,12 +39,12 @@ const initCLI = () => {
         printHelp()
     }
     if (args.s) {
-
+        //cохранение города
     }
     if (args.t) {
         return saveToken(args.t)
     }
-    getWeather('Druzhkivka')
+    getForecast();
 }
 
 initCLI();
