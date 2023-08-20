@@ -33,7 +33,8 @@ const saveCity = async (city) => {
 
 const getForecast = async () => {
     try {
-        const weather = process.env.CITY ?? await getWeather(await getKeyValue(TOKEN_DICTIONARY.city))
+        const city = process.env.CITY ?? await getKeyValue(TOKEN_DICTIONARY.city);
+        const weather =  await getWeather(city)
         console.log(weather); // красивый вывод погоды
     } catch (e) {
         if (e?.response?.status === 404) {
@@ -49,7 +50,7 @@ const getForecast = async () => {
 const initCLI = () => {
     const args = getArgs(process.argv)
     if (args.h) {
-        printHelp()
+        return printHelp()
     }
     if (args.s) {
         return saveCity(args.s)
@@ -57,7 +58,7 @@ const initCLI = () => {
     if (args.t) {
         return saveToken(args.t)
     }
-    getForecast();
+    return getForecast();
 }
 
 initCLI();
