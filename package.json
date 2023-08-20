@@ -1,7 +1,7 @@
 {
   "name": "demo-wether-cli",
   "version": "1.0.0",
-  "description": "CLI fore getting wether",
+  "description": "CLI fore getting weather",
   "main": "weather.js",
   "bin": {
     "weather": "weather.js"
