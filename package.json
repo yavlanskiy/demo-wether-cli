@@ -1,5 +1,5 @@
 {
-  "name": "demo-wether-cli",
+  "name": "weather-cli-base",
   "version": "1.0.0",
   "description": "CLI fore getting weather",
   "main": "weather.js",
@@ -20,7 +20,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://"
+    "url": "https://github.com/yavlanskiy/demo-wether-cli.git"
   },
   "bugs": {
     "email": "yavlansky@gmail.com"
