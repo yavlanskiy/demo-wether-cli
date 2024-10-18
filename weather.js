@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
-import {getArgs} from './helpers/args.js'
 import {printError, printHelp, printSuccess, printWeather} from "./services/log.service.js";
 import {getKeyValue, saveKeyValue, TOKEN_DICTIONARY} from "./services/storage.service.js";
 import {getIcon, getWeather} from "./services/api.service.js";
+import yargs from "yargs";
+import {hideBin} from "yargs/helpers";
 
 
 const saveToken = async (token) => {
@@ -49,15 +50,15 @@ const getForecast = async () => {
 
 }
 const initCLI = () => {
-    const args = getArgs(process.argv)
-    if (args.h) {
+    const argv = yargs(hideBin(process.argv)).parse();
+    if (argv.h) {
         return printHelp()
     }
-    if (args.s) {
-        return saveCity(args.s)
+    if (argv.s) {
+        return saveCity(argv.s)
     }
-    if (args.t) {
-        return saveToken(args.t)
+    if (argv.t) {
+        return saveToken(argv.t)
     }
     return getForecast();
 }
